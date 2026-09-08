@@ -11,7 +11,7 @@ def test_health_endpoint():
     data = response.json()
 
     assert response.status_code == 200
-    assert data["status"] == "healthy"
+    assert data["status"] == "wrong"
 
 
 def test_predict_success():
