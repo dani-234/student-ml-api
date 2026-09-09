@@ -46,10 +46,16 @@ jobs:
       - name: Build and publish image
         env:
           VERSION: ${{ steps.version.outputs.version }}
-          SHORT_SHA: ${{ github.sha }}
+          REVISION: ${{ github.sha }}
+          SOURCE: https://github.com/${{ github.repository }}
         run: |
-          SHORT_SHA="${SHORT_SHA:0:7}"
+          SHORT_SHA="${REVISION:0:7}"
+          CREATED="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           docker build \
+            --build-arg "OCI_SOURCE=${SOURCE}" \
+            --build-arg "OCI_REVISION=${REVISION}" \
+            --build-arg "OCI_VERSION=${VERSION}" \
+            --build-arg "OCI_CREATED=${CREATED}" \
             -t "${IMAGE_NAME}:${VERSION}" \
             -t "${IMAGE_NAME}:latest" \
             -t "${IMAGE_NAME}:${SHORT_SHA}" \

@@ -12,6 +12,8 @@ def test_health_endpoint():
 
     assert response.status_code == 200
     assert data["status"] == "healthy"
+    assert data["application_version"] == "1.1.0"
+    assert data["model_version"] == "model-1"
 
 
 def test_predict_success():
