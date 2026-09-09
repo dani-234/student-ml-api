@@ -12,8 +12,8 @@ class PredictionRequest(BaseModel):
 def health() -> dict[str, str]:
     return {
         "status": "healthy",
-        "application_version": "1.0.0",
-        "model_version": "model-0",
+        "application_version": "1.1.0",
+        "model_version": "model-1",
     }
 
 
